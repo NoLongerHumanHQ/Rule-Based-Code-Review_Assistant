@@ -9,7 +9,7 @@
 
 *An intelligent, rule-based code review automation tool that enhances code quality through customizable analysis patterns*
 
-[🚀 Demo](#demo) • [📖 Documentation](#documentation) • [💡 Features](#features) • [🛠️ Installation](#installation)
+[🚀 Demo](https://rulebasedcodereviewassistant.streamlit.app/) • [📖 Documentation](#documentation) • [💡 Features](#features) • [🛠️ Installation](#installation)
 
 </div>
 
