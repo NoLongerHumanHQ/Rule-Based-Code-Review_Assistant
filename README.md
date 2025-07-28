@@ -1,21 +1,8 @@
-# 🔍 Rule-Based Code Review Assistant
+# Rule-Based Code Review Assistant
 
-<div align="center">
+An intelligent, rule-based code review automation tool that enhances code quality through customizable analysis patterns.
 
-![Code Review Assistant](https://img.shields.io/badge/Code%20Review-Assistant-blue?style=for-the-badge&logo=github)
-![Python](https://img.shields.io/badge/Python-3.8+-green?style=for-the-badge&logo=python)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
-![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge)
-
-*An intelligent, rule-based code review automation tool that enhances code quality through customizable analysis patterns*
-
-[🚀 Demo](https://rulebasedcodereviewassistant.streamlit.app/) • [📖 Documentation](#documentation) • [💡 Features](#features) • [🛠️ Installation](#installation)
-
-</div>
-
----
-
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Architecture](#architecture)
@@ -25,90 +12,56 @@
 - [Configuration](#configuration)
 - [Rule Engine](#rule-engine)
 - [API Reference](#api-reference)
+- [Testing](#testing)
 - [Contributing](#contributing)
+- [Performance](#performance)
+- [Roadmap](#roadmap)
 - [License](#license)
 
-## 🎯 Overview
+## Overview
 
-The **Rule-Based Code Review Assistant** is a sophisticated automation tool designed to streamline the code review process through intelligent pattern recognition and customizable rule sets. It analyzes codebases against predefined quality standards, security patterns, and best practices to provide comprehensive feedback.
+The Rule-Based Code Review Assistant is a sophisticated automation tool designed to streamline the code review process through intelligent pattern recognition and customizable rule sets. It analyzes codebases against predefined quality standards, security patterns, and best practices to provide comprehensive feedback.
 
-### 🎨 Architecture Diagram
+This tool helps development teams maintain consistent coding standards and catch common problems before they reach production, significantly reducing manual review time while improving code quality.
 
-```mermaid
-graph TB
-    A[Source Code] --> B[Code Parser]
-    B --> C[Rule Engine]
-    C --> D[Pattern Matcher]
-    C --> E[Security Scanner]
-    C --> F[Quality Analyzer]
-    D --> G[Report Generator]
-    E --> G
-    F --> G
-    G --> H[Review Report]
-    G --> I[GitHub Integration]
-    
-    subgraph "Rule Engine Core"
-        C
-        J[Custom Rules]
-        K[Built-in Rules]
-        L[Configuration]
-        J --> C
-        K --> C
-        L --> C
-    end
-    
-    style A fill:#e1f5fe
-    style H fill:#c8e6c9
-    style I fill:#fff3e0
-    style C fill:#f3e5f5
-```
+## Architecture
 
-### 🔄 Workflow Process
+The system follows a modular architecture with the following core components:
 
-```mermaid
-sequenceDiagram
-    participant Dev as Developer
-    participant GH as GitHub
-    participant CRA as Code Review Assistant
-    participant RE as Rule Engine
-    participant RG as Report Generator
-    
-    Dev->>GH: Push Code / Create PR
-    GH->>CRA: Webhook Trigger
-    CRA->>RE: Initialize Analysis
-    RE->>RE: Load Rules & Config
-    RE->>RE: Parse & Analyze Code
-    RE->>RG: Generate Findings
-    RG->>GH: Post Review Comments
-    GH->>Dev: Notification
-```
+- **Code Parser**: Analyzes source code structure and syntax
+- **Rule Engine**: Executes customizable rules and patterns
+- **Pattern Matcher**: Detects code patterns and anti-patterns  
+- **Security Scanner**: Identifies potential security vulnerabilities
+- **Quality Analyzer**: Evaluates code complexity and maintainability
+- **Report Generator**: Creates detailed analysis reports
+- **GitHub Integration**: Provides seamless CI/CD workflow integration
 
-## ✨ Features
+## Features
 
-### 🔧 Core Capabilities
-- **🎯 Rule-Based Analysis**: Customizable rule engine for pattern detection
-- **🛡️ Security Scanning**: Built-in security vulnerability detection
-- **📊 Code Quality Metrics**: Complexity analysis and quality scoring
-- **🔗 CI/CD Integration**: Seamless integration with popular CI/CD platforms
-- **📝 Detailed Reporting**: Comprehensive reports with actionable insights
-- **⚡ Real-time Processing**: Fast analysis with minimal performance impact
+### Core Capabilities
+- **Rule-Based Analysis**: Customizable rule engine for pattern detection
+- **Security Scanning**: Built-in security vulnerability detection
+- **Code Quality Metrics**: Complexity analysis and quality scoring
+- **CI/CD Integration**: Seamless integration with popular CI/CD platforms
+- **Detailed Reporting**: Comprehensive reports with actionable insights
+- **Real-time Processing**: Fast analysis with minimal performance impact
 
-### 🚀 Advanced Features
-- **🎨 Custom Rule Creation**: Define your own analysis patterns
-- **📈 Trend Analysis**: Track code quality improvements over time
-- **🤖 GitHub Integration**: Automated PR comments and reviews
-- **🎛️ Configurable Severity Levels**: Customize warning and error thresholds
-- **📦 Multi-language Support**: Support for Python, JavaScript, Java, and more
-- **🔄 Incremental Analysis**: Analyze only changed files for efficiency
+### Advanced Features
+- **Custom Rule Creation**: Define your own analysis patterns
+- **Trend Analysis**: Track code quality improvements over time
+- **GitHub Integration**: Automated PR comments and reviews
+- **Configurable Severity Levels**: Customize warning and error thresholds
+- **Multi-language Support**: Support for Python, JavaScript, Java, and more
+- **Incremental Analysis**: Analyze only changed files for efficiency
 
-## 🛠️ Installation
+## Installation
 
 ### Prerequisites
 - Python 3.8 or higher
 - Git
 - GitHub Token (for GitHub integration)
 
-### Quick Start
+### Standard Installation
 
 ```bash
 # Clone the repository
@@ -139,7 +92,7 @@ docker run -d -p 8080:8080 \
   code-review-assistant
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Command Line Interface
 
@@ -157,23 +110,24 @@ code-review-assistant report --format html --output ./reports/
 code-review-assistant analyze --rules custom_rules.yaml --project .
 ```
 
-### GitHub Integration
+### GitHub Actions Integration
 
 ```yaml
 # .github/workflows/code-review.yml
 name: Automated Code Review
+
 on: [pull_request]
 
 jobs:
   code-review:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Run Code Review Assistant
-      uses: NoLongerHumanHQ/Rule-Based-Code-Review_Assistant@v1
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        config-path: ./.code-review-config.yaml
+      - uses: actions/checkout@v2
+      - name: Run Code Review Assistant
+        uses: NoLongerHumanHQ/Rule-Based-Code-Review_Assistant@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          config-path: ./.code-review-config.yaml
 ```
 
 ### Python API
@@ -195,9 +149,9 @@ report = reviewer.generate_report(results, format="json")
 print(report)
 ```
 
-## ⚙️ Configuration
+## Configuration
 
-### Basic Configuration
+### Main Configuration File
 
 ```yaml
 # config.yaml
@@ -205,7 +159,7 @@ analyzer:
   languages: ["python", "javascript", "java"]
   max_complexity: 10
   min_coverage: 80
-  
+
 rules:
   security:
     enabled: true
@@ -220,14 +174,14 @@ rules:
 github:
   auto_comment: true
   severity_threshold: "warning"
-  
+
 reporting:
   format: ["html", "json"]
   include_suggestions: true
   output_path: "./reports/"
 ```
 
-### Custom Rules Example
+### Custom Rules Definition
 
 ```yaml
 # custom_rules.yaml
@@ -237,7 +191,7 @@ rules:
     pattern: "password\\s*=\\s*['\"][^'\"]+['\"]"
     severity: "critical"
     message: "Hardcoded passwords detected"
-    
+
   - name: "max_function_length"
     type: "quality"
     max_lines: 50
@@ -245,69 +199,69 @@ rules:
     message: "Function exceeds maximum length of 50 lines"
 ```
 
-## 🎯 Rule Engine
+## Rule Engine
 
-### System Architecture
-
-```mermaid
-graph LR
-    A[Rule Definition] --> B[Rule Parser]
-    B --> C[Pattern Compiler]
-    C --> D[Rule Validator]
-    D --> E[Rule Registry]
-    E --> F[Execution Engine]
-    
-    subgraph "Rule Types"
-        G[Security Rules]
-        H[Quality Rules]
-        I[Style Rules]
-        J[Custom Rules]
-    end
-    
-    F --> G
-    F --> H
-    F --> I
-    F --> J
-    
-    style E fill:#ffcdd2
-    style F fill:#c8e6c9
-```
-
-### Built-in Rule Categories
+### Rule Categories
 
 | Category | Description | Examples |
-|----------|-------------|----------|
-| 🛡️ **Security** | Vulnerability detection | SQL injection, XSS, hardcoded secrets |
-| 📊 **Quality** | Code quality metrics | Complexity, duplication, test coverage |
-| 🎨 **Style** | Coding standards | Naming conventions, formatting |
-| 🔧 **Performance** | Performance issues | Inefficient loops, memory leaks |
-| 📚 **Documentation** | Documentation standards | Missing docstrings, outdated comments |
+|----------|-------------|-----------|
+| Security | Vulnerability detection | SQL injection, XSS, hardcoded secrets |
+| Quality | Code quality metrics | Complexity, duplication, test coverage |
+| Style | Coding standards | Naming conventions, formatting |
+| Performance | Performance issues | Inefficient loops, memory leaks |
+| Documentation | Documentation standards | Missing docstrings, outdated comments |
 
-## 📊 Sample Output
+### Creating Custom Rules
 
-### Terminal Output
+```python
+from code_review_assistant.rules import BaseRule
+
+class CustomSecurityRule(BaseRule):
+    def __init__(self):
+        super().__init__(
+            name="custom_security_check",
+            category="security",
+            severity="high"
+        )
+
+    def analyze(self, code_fragment):
+        # Your analysis logic here
+        pass
 ```
-🔍 Code Review Assistant v2.1.0
-📁 Analyzing: /project/src/
 
-✅ Files analyzed: 42
-⚠️  Warnings: 8
-❌ Errors: 2
-🛡️ Security issues: 1
+## API Reference
 
-📋 Summary:
+### Core Classes
+
+- `CodeReviewer`: Main interface for code analysis
+- `RuleEngine`: Manages and executes rules
+- `ReportGenerator`: Creates analysis reports
+- `GitHubIntegration`: Handles GitHub API interactions
+
+### Sample Output
+
+#### Console Output
+```
+Code Review Assistant v2.1.0
+Analyzing: /project/src/
+Files analyzed: 42
+Warnings: 8
+Errors: 2
+Security issues: 1
+
+Summary:
 ┌─────────────────┬───────┬─────────┬────────┐
 │ Category        │ Count │ High    │ Medium │
 ├─────────────────┼───────┼─────────┼────────┤
-│ Security        │   1   │    1    │   0    │
-│ Quality         │   6   │    0    │   4    │
-│ Style           │   3   │    0    │   2    │
+│ Security        │ 1     │ 1       │ 0      │
+│ Quality         │ 6     │ 0       │ 4      │
+│ Style           │ 3     │ 0       │ 2      │
 └─────────────────┴───────┴─────────┴────────┘
 
-📝 Detailed Report: ./reports/review_2024-01-15.html
+Detailed Report: ./reports/review_2024-01-15.html
 ```
 
-### JSON Report Structure
+#### JSON Output
 ```json
 {
   "metadata": {
@@ -336,7 +290,7 @@ graph LR
 }
 ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run all tests
@@ -349,7 +303,7 @@ python -m pytest --cov=code_review_assistant
 python -m pytest tests/test_rules.py -v
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
@@ -369,56 +323,34 @@ pre-commit install
 make test
 ```
 
-### Creating Custom Rules
-
-```python
-from code_review_assistant.rules import BaseRule
-
-class CustomSecurityRule(BaseRule):
-    def __init__(self):
-        super().__init__(
-            name="custom_security_check",
-            category="security",
-            severity="high"
-        )
-    
-    def analyze(self, code_fragment):
-        # Your analysis logic here
-        pass
-```
-
-## 📈 Performance Metrics
+## Performance
 
 | Metric | Value |
 |--------|-------|
-| **Analysis Speed** | ~1000 lines/second |
-| **Memory Usage** | <50MB for typical projects |
-| **Accuracy** | 95%+ for built-in rules |
-| **False Positive Rate** | <5% |
+| Analysis Speed | ~1000 lines/second |
+| Memory Usage | <50MB for typical projects |
+| Accuracy | 95%+ for built-in rules |
+| False Positive Rate | <5% |
 
-## 🗺️ Roadmap
+## Roadmap
 
-- [ ] **v2.2** - Machine Learning integration for smart suggestions
-- [ ] **v2.3** - VS Code extension
-- [ ] **v2.4** - GitLab and Bitbucket integration
-- [ ] **v2.5** - Natural language rule definition
-- [ ] **v3.0** - AI-powered code improvement suggestions
+- **v2.2** - Machine Learning integration for smart suggestions
+- **v2.3** - VS Code extension
+- **v2.4** - GitLab and Bitbucket integration
+- **v2.5** - Natural language rule definition
+- **v3.0** - AI-powered code improvement suggestions
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Inspired by industry-leading code review tools
-- Built with ❤️ for the developer community
+- Built with dedication for the developer community
+
+[Star this repository](https://github.com/NoLongerHumanHQ/Rule-Based-Code-Review_Assistant) if you find it helpful!
 
 ---
 
-<div align="center">
-
-**[⭐ Star this repository](https://github.com/NoLongerHumanHQ/Rule-Based-Code-Review_Assistant)** if you find it helpful!
-
-Made with ❤️ by [NoLongerHumanHQ](https://github.com/NoLongerHumanHQ)
-
-</div>
+Made by [NoLongerHumanHQ](https://github.com/NoLongerHumanHQ)
